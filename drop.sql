@@ -1,0 +1,9 @@
+DROP TABLE Record;
+DROP TABLE Specialize;
+DROP TABLE Doctor;
+DROP TABLE PublicServant CASCADE;
+DROP TABLE Users;
+DROP TABLE Discover;
+DROP TABLE Disease;
+DROP TABLE Country;
+DROP TABLE DiseaseType;

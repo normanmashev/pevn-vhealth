@@ -1,0 +1,25 @@
+@import "./mixins.scss";
+@import "./variables.scss";
+@import "./transitions.scss";
+
+body {
+	height: 100vh;
+}
+
+.is-fullheight {
+	height: 100%;
+}
+
+.my-image {
+	transition: all 0.4s ease;
+	&:hover {
+		transform: scale(1.03);
+	}
+}
+
+.my-card {
+	transition: transform 0.3s ease;
+	&:hover {
+		transform: translateY(-5px) !important;
+	}
+}
