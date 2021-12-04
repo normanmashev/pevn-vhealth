@@ -14,8 +14,27 @@ function convertDate(x) {
 	return [yyyy, mm, dd].join("-");
 }
 
+function convertYodaDate(x) {
+	let [y, m, d] = x.split("-");
+	const months = [
+		"January",
+		"February",
+		"March",
+		"April",
+		"May",
+		"June",
+		"July",
+		"August",
+		"September",
+		"October",
+		"November",
+		"December",
+	];
+	return `${months[m - 1]} ${d}, ${y}`;
+}
+
 function getFullname(obj) {
 	return `${capitalizeString(obj.name)} ${capitalizeString(obj.surname)}`;
 }
 
-export { capitalizeString, convertDate, getFullname };
+export { capitalizeString, convertDate, convertYodaDate, getFullname };
