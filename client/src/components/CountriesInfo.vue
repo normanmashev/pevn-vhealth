@@ -88,12 +88,6 @@ export default {
 
 	components: { CountryPopulationModal },
 
-	data() {
-		return {
-			number: 32412341,
-		};
-	},
-
 	computed: {
 		...mapGetters({
 			countryInfo: "country/getCountryInfo",
