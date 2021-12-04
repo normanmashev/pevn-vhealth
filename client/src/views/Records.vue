@@ -3,7 +3,7 @@
 		<div class="column">
 			<RecordsTable />
 		</div>
-		<div v-if="role !== 'doctor'" class="column">
+		<div v-if="role !== 'Doctor'" class="column">
 			<RecordsServant />
 		</div>
 	</section>
