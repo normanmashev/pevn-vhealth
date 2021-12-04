@@ -1,4 +1,6 @@
 import Vue from "vue";
-import { getFullname } from "./helpers";
+import { convertYodaDate, getFullname } from "./helpers";
 
 Vue.filter("getFullname", getFullname);
+
+Vue.filter("convertYodaDate", convertYodaDate);
