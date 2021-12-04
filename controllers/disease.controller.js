@@ -64,11 +64,13 @@ class DiseaseController {
 		try {
 			const { id } = req.params;
 			const disease = await db.query(
-				`SELECT D.*, 
+				`SELECT D.*, DT.description as disease_type,
         json_agg(json_build_object('first_enc_date', F.first_enc_date, 'cname', F.cname)) as encounters
         FROM Disease as D
         JOIN Discover as F
         ON F.disease_code = D.disease_code
+        JOIN DiseaseType as DT
+        ON DT.id = D.id
         WHERE D.disease_code = $1
         GROUP BY D.disease_code`,
 				[id]
