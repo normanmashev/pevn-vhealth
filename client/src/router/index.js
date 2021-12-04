@@ -17,6 +17,15 @@ const routes = [
 		component: () => import("@/views/Home.vue"),
 	},
 	{
+		path: "/countries",
+		name: "Countries",
+		meta: {
+			title: "Countries",
+			requireAuth: true,
+		},
+		component: () => import("@/views/Countries.vue"),
+	},
+	{
 		path: "/doctors",
 		name: "Doctors",
 		meta: {
