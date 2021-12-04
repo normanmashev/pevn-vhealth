@@ -2,9 +2,6 @@
 	<section class="doctors-table">
 		<div class="is-flex is-flex-direction-column is-align-items-center mb-2">
 			<h1 class="is-size-5 mr-2">Doctors</h1>
-			<legend class="is-size-9">
-				You can click on a row to see more information about doctor
-			</legend>
 		</div>
 		<b-table
 			:data="data"
@@ -20,7 +17,6 @@
 			default-sort="diseasecode"
 			:current-page.sync="currentPage"
 			:loading="loading"
-			@click="showRowInfo"
 		>
 			<b-table-column
 				v-for="field of fields"
@@ -49,7 +45,7 @@
 import { mapGetters } from "vuex";
 
 export default {
-	name: "ServantsTable",
+	name: "DoctorsTable",
 
 	data() {
 		return {
@@ -70,12 +66,6 @@ export default {
 			loading: "doctors/getLoading",
 			data: "doctors/getDoctors",
 		}),
-	},
-
-	methods: {
-		showRowInfo(e) {
-			this.$store.dispatch("doctors/getDoctorInfo", e.email);
-		},
 	},
 
 	mounted() {
