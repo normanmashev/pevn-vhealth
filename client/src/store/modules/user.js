@@ -1,5 +1,5 @@
 import { Register, Login } from "@/api/auth";
-import { getUser } from "@/api/users";
+import { GetUser, UpdateUser } from "@/api/users";
 
 import cookies from "@/utils/cookies";
 
@@ -26,7 +26,7 @@ const actions = {
 	async getOneUser({ commit }, id) {
 		try {
 			commit("SET_LOADING", true);
-			const res = await getUser(id);
+			const res = await GetUser(id);
 			return res;
 		} catch (error) {
 			throw error;
@@ -46,6 +46,15 @@ const actions = {
 			commit("SET_USER_INFO", info);
 
 			return { message: res.message };
+		} catch (error) {
+			throw error;
+		}
+	},
+
+	async updateUser({}, data) {
+		try {
+			const res = await UpdateUser(data);
+			return res;
 		} catch (error) {
 			throw error;
 		}

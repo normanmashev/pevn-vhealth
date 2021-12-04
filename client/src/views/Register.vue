@@ -134,8 +134,7 @@
 					</b-notification>
 
 					<b-button class="mt-3" type="is-primary" @click="handleRegister">
-						<!-- validate().then(handleRegister) -->
-						Create account
+						Save changes
 					</b-button>
 				</div>
 			</div>

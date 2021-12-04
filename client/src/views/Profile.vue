@@ -11,7 +11,9 @@
 				</b-notification>
 			</div>
 
-			<UserInfo :info="info" />
+			<div class="column is-12">
+				<UserInfo :info="info" />
+			</div>
 		</div>
 	</section>
 </template>
