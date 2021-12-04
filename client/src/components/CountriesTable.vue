@@ -12,7 +12,7 @@
 			hoverable
 			mobile-cards
 			paginated
-			per-page="5"
+			:per-page="perPage"
 			pagination-simple
 			pagination-position="bottom"
 			sort-icon="chevron-up"
@@ -20,13 +20,14 @@
 			default-sort="diseasecode"
 			:current-page.sync="currentPage"
 			:loading="loading"
+			@click="showRowInfo"
 		>
 			<b-table-column
 				v-for="field of fields"
 				:key="field.field"
-				:field="field.field"
-				:label="field.label"
+				v-bind="field"
 				v-slot="props"
+				sortable
 			>
 				{{ props.row[field.field] }}
 			</b-table-column>
@@ -46,6 +47,13 @@ export default {
 	name: "CountriesTable",
 
 	components: { CountriesModal },
+
+	props: {
+		perPage: {
+			type: [Number, String],
+			default: 5,
+		},
+	},
 
 	data() {
 		return {
@@ -69,12 +77,15 @@ export default {
 			await this.$store.dispatch("country/getCountries");
 		},
 
+		showRowInfo(e) {
+			this.$store.dispatch("country/getCountryInfo", e);
+		},
+
 		showAddModal() {
 			this.$buefy.modal.open({
 				parent: this,
 				component: CountriesModal,
 				hasModalCard: true,
-				customClass: "custom-class custom-class-2",
 				trapFocus: true,
 			});
 		},
