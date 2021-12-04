@@ -67,14 +67,19 @@ class DiseaseController {
 				`SELECT D.*, DT.description as disease_type,
         json_agg(json_build_object('first_enc_date', F.first_enc_date, 'cname', F.cname)) as encounters
         FROM Disease as D
-        JOIN Discover as F
+        LEFT JOIN Discover as F
         ON F.disease_code = D.disease_code
         JOIN DiseaseType as DT
         ON DT.id = D.id
         WHERE D.disease_code = $1
-        GROUP BY D.disease_code`,
+        GROUP BY D.disease_code, DT.description`,
 				[id]
 			);
+
+			if (disease.rows[0].encounters[0].cname === null) {
+				disease.rows[0].encounters = [];
+			}
+
 			return res.json(disease.rows[0]);
 		} catch (error) {
 			return res.status(400).send({ message: error.message });
@@ -114,6 +119,31 @@ class DiseaseController {
 			);
 
 			return res.json(dangerous.rows);
+		} catch (error) {
+			return res.status(400).send({ message: error.message });
+		}
+	}
+
+	async deleteDiseaseEncounter(req, res) {
+		try {
+			const { disease_code, cname } = req.body;
+
+			console.log(disease_code, cname);
+			const candidate = await db.query(
+				`SELECT * FROM Discover WHERE cname = $1 AND disease_code = $2`,
+				[cname, disease_code]
+			);
+
+			if (!candidate.rows.length) {
+				throw { message: `${disease_code} was NOT discovered in ${cname} yet` };
+			}
+
+			await db.query(
+				`DELETE FROM Discover WHERE cname = $1 AND disease_code = $2`,
+				[cname, disease_code]
+			);
+
+			return res.json({ message: "Encounter has been deleted" });
 		} catch (error) {
 			return res.status(400).send({ message: error.message });
 		}

@@ -12,13 +12,14 @@
 			hoverable
 			mobile-cards
 			paginated
-			per-page="5"
+			:per-page="perPage"
 			pagination-simple
 			pagination-position="bottom"
 			sort-icon="chevron-up"
 			sort-icon-size="is-small"
 			:current-page.sync="currentPage"
 			:loading="isLoading"
+			@click="showRowInfo"
 		>
 			<b-table-column
 				v-for="field of fields"
@@ -50,9 +51,9 @@ export default {
 	},
 
 	props: {
-		extended: {
-			type: Boolean,
-			default: false,
+		perPage: {
+			type: [Number, String],
+			default: 5,
 		},
 	},
 
@@ -83,6 +84,10 @@ export default {
 	},
 
 	methods: {
+		showRowInfo(e) {
+			this.$store.dispatch("disease/getDiseaseInfo", e);
+		},
+
 		showAddModal() {
 			this.$buefy.modal.open({
 				parent: this,

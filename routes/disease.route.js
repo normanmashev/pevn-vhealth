@@ -11,6 +11,12 @@ router.post("/type", authMiddleware, DiseaseTypeController.create);
 router.get("/type", authMiddleware, DiseaseTypeController.getAll);
 router.get("/type/:id", authMiddleware, DiseaseTypeController.getOne);
 
+router.delete(
+	"/encounter",
+	authMiddleware,
+	DiseaseController.deleteDiseaseEncounter
+);
+
 router.get(
 	"/most-dangerous",
 	authMiddleware,
